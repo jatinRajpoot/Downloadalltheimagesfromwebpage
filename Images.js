@@ -1,3 +1,22 @@
+// Load JSZip and FileSaver.js libraries
+function loadScript(url, callback) {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = url;
+  script.onload = callback;
+  document.head.appendChild(script);
+}
+
+loadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js', function() {
+  loadScript('https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js', function() {
+    // Both libraries are now loaded
+    downloadImagesLocally();
+  });
+});
+
+
+
+
 function downloadImagesLocally() {
   // Select all the image elements on the page
   var images = document.querySelectorAll('img');
@@ -19,7 +38,7 @@ function downloadImagesLocally() {
       })
       .then(function(imageBlob) {
         // Add the image to the zip file with a unique name
-        zip.file('image_' + imageCount + '.png', imageBlob);
+        zip.file('image_' + imageCount + '.jpg', imageBlob);
 
         // Increment the image count
         imageCount++;
